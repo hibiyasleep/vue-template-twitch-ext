@@ -1,0 +1,34 @@
+{
+  "name": "twitch-ext-template",
+  "version": "0.0.1",
+  "versionname": "",
+  "description": "Dummy extension",
+  "dependencies": {
+    "axios": "^0.19",
+    "vue": "2.x",
+    "vue-router": "3.x",
+    "vuex": "3.x"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "1.x",
+    "node-sass": "latest",
+    "webpack": "latest",
+    "webpack-cli": "latest",
+    "vue-loader": "14.x",
+    "vue-template-compiler": "2.x",
+    "vue-hot-reload-api": "2.x",
+    "@babel/core": "7.x",
+    "@babel/plugin-proposal-object-rest-spread": "7.x",
+    "babel-loader": "8.x",
+    "html-webpack-plugin": "latest",
+    "copy-webpack-plugin": "latest",
+    "script-ext-html-webpack-plugin": "latest",
+    "zip-webpack-plugin": "latest",
+    "uglifyjs-webpack-plugin": "latest"
+  },
+  "scripts": {
+    "clean": "rm dist/*",
+    "build": "NODE_ENV=production webpack-cli",
+    "dev": "NODE_ENV=development webpack-dev-server --mode=development --config=webpack.config.js --progress"
+  }
+}
