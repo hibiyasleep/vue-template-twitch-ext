@@ -10,7 +10,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-  entry: ...{{templates}}.reduce((p, c) => {
+  entry: {{toArray templates}}.reduce((p, c) => {
     p[c] = c + '/index.js'
     return p
   }, {}),
@@ -102,7 +102,7 @@ module.exports = {
     // new BundleAnalyzerPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    ...{{templates}}.map(_ => new HtmlWebpackPlugin({
+    ...{{toArray templates}}.map(_ => new HtmlWebpackPlugin({
       filename: _ + '.html',
       template: _ + '/index.html',
       inject: true,

@@ -111,7 +111,8 @@ module.exports = {
     }
   },
   helpers: {
-    includes: (list, check) => list.includes(check)
+    includes: (list, check) => list.includes(check),
+    toArray: o => JSON.stringify(Object.keys(o).filter(_ => o[_]))
   },
   filters: {
     '.eslintrc.js': 'lint',
