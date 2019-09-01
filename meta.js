@@ -3,71 +3,83 @@
 module.exports = {
   prompts: {
     name: {
-      type: 'string',
+      type: "string",
       required: true,
-      message: 'Application Name',
-      default: 'twitch-ext-your-app'
-    },
-    appver: {
-        type: 'string',
-        required: true,
-        message: 'Application Version',
-        default: '0.0.1'
+      label: "Project name"
     },
     description: {
-      type: 'string',
-      required: false,
-      message: 'Project description',
-      default: 'An electron-vue project'
+      type: "string",
+      required: true,
+      label: "Project description",
+      default: "A Vue.js project"
     },
-    usesass: {
-        type: 'confirm',
-        message: 'Use Sass / Scss?',
-        required: true
+    author: {
+      type: "string",
+      label: "Author"
     },
-    plugins: {
-      type: 'checkbox',
-      message: 'Select which Vue plugins to install',
-      choices: ['axios', 'vue-router', 'vuex'],
-      default: ['axios', 'vue-router', 'vuex']
+    license: {
+      type: "string",
+      label: "License",
+      default: "MIT"
     },
-    eslint: {
+    sass: {
+       type: "confirm",
+       message: "Use sass?",
+       default: true
+    },
+    lint: {
       type: 'confirm',
-      require: true,
-      message: 'Use linting with ESLint?',
-      default: true
+      message: 'Use ESLint to lint your code?',
     },
-    eslintConfig: {
-      when: 'eslint',
+    lintConfig: {
+      when: 'lint',
       type: 'list',
-      message: 'Which ESLint config would you like to use?',
+      message: 'Pick an ESLint preset',
       choices: [
         {
-          name: 'Standard (https://github.com/feross/standard)',
+          name: 'Standard (https://github.com/standard/standard)',
           value: 'standard',
-          short: 'Standard'
-        },
-        {
+          short: 'Standard',
+        }, {
           name: 'Airbnb (https://github.com/airbnb/javascript)',
           value: 'airbnb',
-          short: 'Airbnb'
-        },
-        {
+          short: 'Airbnb',
+        }, {
           name: 'none (configure it yourself)',
           value: 'none',
-          short: 'none'
-        }
-      ]
+          short: 'none',
+        },
+      ],
     },
     // unit: {
     //   type: 'confirm',
-    //   message: 'Set up unit testing with Karma + Mocha?',
-    //   required: true
+    //   message: 'Set up unit tests',
+    // },
+    // runner: {
+    //   when: 'unit',
+    //   type: 'list',
+    //   message: 'Pick a test runner',
+    //   choices: [
+    //     {
+    //       name: 'Jest',
+    //       value: 'jest',
+    //       short: 'jest',
+    //     },
+    //     {
+    //       name: 'Karma and Mocha',
+    //       value: 'karma',
+    //       short: 'karma',
+    //     },
+    //     {
+    //       name: 'none (configure it yourself)',
+    //       value: 'noTest',
+    //       short: 'noTest',
+    //     },
+    //   ],
     // },
     // e2e: {
     //   type: 'confirm',
-    //   message: 'Set up end-to-end testing with Spectron + Mocha?',
-    //   require: true
+    //   message: 'Setup e2e tests with Nightwatch?',
     // },
     templates: {
       type: 'checkbox',
@@ -92,50 +104,33 @@ module.exports = {
         },
       ],
       default: ['component', 'panel', 'overlay', 'config']
+    },
+    useIdShare: {
+      type: 'confirm',
+      message: 'Request Identify Share to users?'
     }
   },
   helpers: {
-    isEnabled(list, check, opts) {
-      if(list[check]) return opts.fn(this)
-      else return opts.inverse(this)
-    },
-    deps(plugins) {
-      let output = ''
-      let dependencies = {
-        'axios': '^0.19.0',
-        'vue-router': '^3',
-        'vuex': '^3'
-      }
-
-      if(Object.keys(plugins).length > 0) output += ',\n'
-
-      Object.keys(plugins).forEach((p, i) => {
-        output += `    "${p}": "${dependencies[p]}"`
-        if (i !== Object.keys(plugins).length - 1) output += ',\n'
-      })
-
-      return output
-    },
-    testing(unit, e2e, opts) {
-      if(unit || e2e) {
-        return opts.fn(this)
-      }
-    }
+    includes: (list, check) => list.includes(check)
   },
   filters: {
-    // 'src/renderer/routes.js': 'plugins[\'vue-router\']',
-    // 'src/renderer/components/LandingPageView/CurrentPage.vue': 'plugins[\'vue-router\']',
-    // 'src/renderer/router/**/*': 'plugins[\'vue-router\']',
-    // 'src/renderer/store/**/*': 'plugins[\'vuex\']',
-    'component': "templates['component']",
-    'panel': "templates['panel']",
-    'overlay': "templates['overlay']",
-    'config': "templates['config']",
-    // 'test/e2e/**/*': 'e2e',
+    '.eslintrc.js': 'lint',
+    '.eslintignore': 'lint',
+    'component/**/*': 'templates.component',
+    'panel/**/*': 'templates.panel',
+    'overlay/**/*': 'templates.overlay',
+    'config/**/*': 'templates.config',
+    'config/index.html': '!templates.config',
+    '*/pages/request-permission.vue': 'useIdShare',
+    // 'config/test.env.js': 'unit || e2e',
+    // 'build/webpack.test.conf.js': "unit && runner === 'karma'",
     // 'test/unit/**/*': 'unit',
-    // 'test/.eslintrc': 'e2e || unit',
-    '.eslintignore': 'eslint',
-    '.eslintrc.js': 'eslint',
+    // 'test/unit/index.js': "unit && runner === 'karma'",
+    // 'test/unit/jest.conf.js': "unit && runner === 'jest'",
+    // 'test/unit/karma.conf.js': "unit && runner === 'karma'",
+    // 'test/unit/specs/index.js': "unit && runner === 'karma'",
+    // 'test/unit/setup.js': "unit && runner === 'jest'",
+    // 'test/e2e/**/*': 'e2e',
   },
   complete (data) {
     console.log([

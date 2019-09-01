@@ -23,13 +23,13 @@ const store = new Vuex.Store({
     setAuth(state, auth) {
       Vue.set(state, 'auth', auth)
       axios.defaults.headers.Authorization = 'Bearer ' + auth.token
-    },
+    },{{#if_eq useIdShare true}}
     setToken(state, token) {
       Vue.set(state, 'token', token)
     },
     setUid(state, uid) {
       Vue.set(state, 'uid', uid)
-    },
+    },{{/if_eq}}
     // #endregion
     helloWorld(state) {
       state.message.push('Hello, World!')
@@ -37,7 +37,7 @@ const store = new Vuex.Store({
   },
   getters: {
   },
-  actions: {
+  actions: { {{#if_eq useIdShare true}}
     // #region twitch auth
     // if your extension doesn't require identity link, ignore this section
     authorized({ commit, dispatch }, data) {
@@ -60,7 +60,7 @@ const store = new Vuex.Store({
         // router.push('/')
       }
     },
-    // #endregion
+    // #endregion{{/if_eq}}
     init({ commit }) {
       commit('helloWorld')
     }

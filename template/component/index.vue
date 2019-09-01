@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main :class="'twitch-color-mode-' + $store.state.context.theme">
     <router-view />
   </main>
 </template>
@@ -12,5 +12,8 @@
 
 body
   font-family: system-ui, sans-serif
+
+.twitch-color-mode-dark
+  color: #e0e0e0
 
 </style>

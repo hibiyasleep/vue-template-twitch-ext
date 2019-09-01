@@ -1,10 +1,10 @@
 <template>
   <div>
     <p>
-      익스텐션을 사용하기 위해 Twitch ID의 접근을 허용해주세요.
+      Please allow identify sharing, to use this extension.
     </p>
     <p>
-      <button @click="grant">허용하기</button>
+      <button @click="grant">requestIdShare()</button>
     </p>
   </div>
 </template>

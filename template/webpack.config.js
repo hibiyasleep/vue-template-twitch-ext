@@ -10,10 +10,10 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-  entry: {
-    overlay: './overlay/index.js',
-    config: './config/index.js',
-  },
+  entry: ...{{templates}}.reduce((p, c) => {
+    p[c] = c + '/index.js'
+    return p
+  }, {}),
   output: {
     path: path.resolve(__dirname, './dist'),
     // publicPath: './',
@@ -27,18 +27,20 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ],
-      }, {
+      },{{#sass}} {
         test: /\.sass$/,
         use: [
           'vue-style-loader',
           'css-loader',
           'sass-loader?indentedSyntax'
         ],
-      }, {
+      },{{/sass}} {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: 'vue-loader'{{#sass}},
         options: {
           loaders: {
+            // scss is not configured here; to use scss, copy sass to scss and
+            // turn off indentedSyntax option.
             'sass': [
               'vue-style-loader',
               'css-loader',
@@ -52,7 +54,7 @@ module.exports = {
               }
             ]
           }
-        }
+        }{{/sass}}
       }, {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -88,8 +90,8 @@ module.exports = {
     historyApiFallback: true,
     index: 'index.html',
     https: {
-      key: fs.readFileSync('../shion-selfsigned.key'),
-      cert: fs.readFileSync('../shion-selfsigned.crt')
+      key: fs.readFileSync('./localhost-dev.key'),
+      cert: fs.readFileSync('./localhost-dev.crt')
     }
   },
   performance: {
@@ -100,22 +102,14 @@ module.exports = {
     // new BundleAnalyzerPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'video_component.html',
-      template: 'overlay/index.html',
+    ...{{templates}}.map(_ => new HtmlWebpackPlugin({
+      filename: _ + '.html',
+      template: _ + '/index.html',
       inject: true,
       compress: true,
       contentBase: '/dist/',
-      chunks: ['overlay']
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'config.html',
-      template: 'config/index.html',
-      inject: true,
-      compress: true,
-      contentBase: '/dist/',
-      chunks: ['config']
-    })
+      chunks: [_]
+    }))
   ],
   node: {
     setImmediate: false,
