@@ -1,8 +1,14 @@
 {
-  "name": "twitch-ext-template",
+  "name": "{{ name }}",
   "version": "0.0.1",
-  "versionname": "",
-  "description": "Dummy extension",
+  "description": "{{ description }}",
+  "author": "{{ author }}",
+  "private": true,
+  "scripts": {
+    "build": "NODE_ENV=production webpack-cli",
+    "clean": "rimraf dist",
+    "dev": "NODE_ENV=development webpack-dev-server --mode=development --config=webpack.config.js --progress"
+  },
   "dependencies": {
     "axios": "^0.19",
     "vue": "2.x",
@@ -10,25 +16,26 @@
     "vuex": "3.x"
   },
   "devDependencies": {
-    "@vue/component-compiler-utils": "1.x",
-    "node-sass": "latest",
-    "webpack": "latest",
-    "webpack-cli": "latest",
-    "vue-loader": "14.x",
-    "vue-template-compiler": "2.x",
-    "vue-hot-reload-api": "2.x",
     "@babel/core": "7.x",
     "@babel/plugin-proposal-object-rest-spread": "7.x",
+    "@vue/component-compiler-utils": "1.x",
     "babel-loader": "8.x",
-    "html-webpack-plugin": "latest",
     "copy-webpack-plugin": "latest",
+    "node-sass": "latest",
+    {{#if_eq lintConfig "prettier"}}
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4",
+    {{/if_eq}}
+    "html-webpack-plugin": "latest",
+    "rimraf": "^3.0.0",
     "script-ext-html-webpack-plugin": "latest",
-    "zip-webpack-plugin": "latest",
-    "uglifyjs-webpack-plugin": "latest"
-  },
-  "scripts": {
-    "clean": "rm dist/*",
-    "build": "NODE_ENV=production webpack-cli",
-    "dev": "NODE_ENV=development webpack-dev-server --mode=development --config=webpack.config.js --progress"
+    "uglifyjs-webpack-plugin": "latest",
+    "vue-hot-reload-api": "2.x",
+    "vue-loader": "14.x",
+    "vue-template-compiler": "2.x",
+    "webpack": "latest",
+    "webpack-cli": "latest",
+    "zip-webpack-plugin": "latest"
   }
 }

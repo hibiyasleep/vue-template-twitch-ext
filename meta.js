@@ -15,7 +15,8 @@ module.exports = {
     },
     author: {
       type: "string",
-      label: "Author"
+      label: "Author",
+      message: 'Author'
     },
     license: {
       type: "string",
@@ -44,6 +45,10 @@ module.exports = {
           name: 'Airbnb (https://github.com/airbnb/javascript)',
           value: 'airbnb',
           short: 'Airbnb',
+        }, {
+          name: 'Prettier (Recommended)',
+          value: 'prettier',
+          short: 'prettier'
         }, {
           name: 'none (configure it yourself)',
           value: 'none',
