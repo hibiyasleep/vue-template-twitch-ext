@@ -90,8 +90,8 @@ module.exports = {
     historyApiFallback: true,
     index: 'index.html',
     https: {
-      key: fs.readFileSync('./localhost-dev.key'),
-      cert: fs.readFileSync('./localhost-dev.crt')
+      key: fs.readFileSync('../conf/server.key'),
+      cert: fs.readFileSync('../conf/server.crt')
     }
   },
   performance: {
@@ -156,7 +156,9 @@ if (process.env.NODE_ENV === 'production') {
       toType: 'dir'
     }]),
     new ZipWebpackPlugin({
-      filename: package.name + '-' + package.version + '.zip',
+      filename: `${package.name}-${package.version}-${Math.floor(
+        new Date().getTime() / 1000
+      ).toString(10)}.zip`
       // pathMapper: function(assetPath) {
       //   if(assetPath.startsWith('dist/'))
       //     return assetPath.replace('dist/', 'assets/')
