@@ -6,7 +6,7 @@ Vue.use(Router)
 const routes = [
   {
     path: '/',
-    component: require('./pages/main.vue').default,
+    component: require('./pages/index.vue').default,
   }{{#if_eq useIdShare true}}, {
     path: '/request-permission',
     component: require('./pages/request-permission.vue').default
