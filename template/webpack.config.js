@@ -11,7 +11,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   entry: {{toArray templates}}.reduce((p, c) => {
-    p[c] = c + '/index.js'
+    p[c] = `./${c}/index.js`
     return p
   }, {}),
   output: {
