@@ -36,6 +36,7 @@
     "vue-template-compiler": "2.x",
     "webpack": "latest",
     "webpack-cli": "latest",
+    "webpack-dev-server": "latest",
     "zip-webpack-plugin": "latest"
   }
 }
