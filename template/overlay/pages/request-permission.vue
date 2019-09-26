@@ -5,7 +5,7 @@
       <span v-text="$t('message.permission')" />
       {{else}}
       Please allow identify sharing, to use this extension.
-      {{{/if}}
+      {{/if}}
     </p>
     <p>
       <button @click="grant">requestIdShare()</button>
