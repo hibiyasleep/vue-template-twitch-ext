@@ -9,7 +9,6 @@
           "not android < 300"
         ]
       },
-      "____include": [ "es7.promise.finally" ],
       "debug": true
     }]
   ]
