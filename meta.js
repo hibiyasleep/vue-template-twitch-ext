@@ -122,6 +122,7 @@ module.exports = {
   filters: {
     '.eslintrc.js': 'lint',
     '.eslintignore': 'lint',
+    '.prettierrc': 'lintConfig.prettier',
     'component/**/*': 'templates.component',
     'panel/**/*': 'templates.panel',
     'overlay/**/*': 'templates.overlay',
