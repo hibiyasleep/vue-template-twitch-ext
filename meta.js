@@ -11,7 +11,7 @@ module.exports = {
       type: "string",
       required: true,
       label: "Project description",
-      default: "A Vue.js project"
+      default: "A Twitch Extension project built with Vue.js"
     },
     author: {
       type: "string",
