@@ -14,7 +14,9 @@ const _state = () => ({
   auth: null,
   token: {},
   uid: null,
-
+  {{#if_eq i18n true}}
+  lang: null,
+  {{/if_eq}}
   message: []
 })
 
@@ -36,6 +38,20 @@ const store = new Vuex.Store({
       Vue.set(state, 'uid', uid)
     },
     // #endregion
+    {{#if_eq i18n true}}
+    setLang(state, lang) {
+      if(state.lang !== lang) {
+        Vue.set(state, 'lang', lang)
+        Vue.i18n.set(lang)
+        try {
+          if(localStorage.getItem('lang') !== lang)
+            localStorage.setItem('lang', lang)
+        } catch (e) {
+          console.error(e)
+        }
+      }
+    },
+    {{/if_eq}}
     helloWorld(state) {
       state.message.push('Hello, World!')
     }
@@ -61,6 +77,19 @@ const store = new Vuex.Store({
     // #endregion
     init({ commit }) {
       commit('helloWorld')
+      {{#if_eq i18n true}}
+      const [lang, locale] = (((navigator.userLanguage || navigator.language).replace('-', '_')).toLowerCase()).split('_')
+      try {
+        const storedLang = localStorage.getItem('lang')
+        if(storedLang) {
+          commit('setLang', storedLang)
+        } else {
+          commit('setLang', lang)
+        }
+      } catch (e) {
+        console.error(e)
+      }
+      {{/if_eq}}
     }
   }
 })
