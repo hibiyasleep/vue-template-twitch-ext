@@ -40,6 +40,10 @@
     "vue-loader": "14.x",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "2.x",
+    {{#if_eq i18n true}}
+    "vuex-i18n": "^1.13.1",
+    "promise-fs": "2.1.1",
+    {{/if_eq}}
     "webpack": "latest",
     "webpack-cli": "latest",
     "webpack-dev-server": "latest",

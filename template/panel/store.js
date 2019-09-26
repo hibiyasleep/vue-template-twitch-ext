@@ -2,6 +2,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+{{#if_eq i18n true}}
+import vuexI18n from 'vuex-i18n'
+import languages from '../locales'
+{{/if_eq}}
+
 Vue.use(Vuex)
 
 const _state = () => ({
@@ -67,4 +72,10 @@ const store = new Vuex.Store({
   }
 })
 
+{{#if_eq i18n true}}
+const lang = languages()
+Vue.use(vuexI18n.plugin, store)
+Object.keys(lang).forEach(l => Vue.i18n.add(l, lang[l]))
+Vue.i18n.set('{{ i18nLang }}')
+{{/if_eq}}
 export default store
