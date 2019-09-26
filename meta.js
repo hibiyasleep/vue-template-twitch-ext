@@ -56,6 +56,38 @@ module.exports = {
         },
       ],
     },
+    i18n: {
+      type: "confirm",
+      message: "Use vue-i18n?",
+      default: true
+    },
+    i18nLang: {
+      when: 'i18n',
+      type: 'list',
+      message: 'Pick an default language',
+      choices: [
+        {
+          name: 'English',
+          value: 'en',
+          short: 'en',
+        },
+        {
+          name: 'Korean',
+          value: 'ko',
+          short: 'ko',
+        },
+        {
+          name: 'Japanese',
+          value: 'jp',
+          short: 'jp',
+        },
+        {
+          name: 'Chinese',
+          value: 'zh',
+          short: 'zh'
+        }
+      ]
+    },
     // unit: {
     //   type: 'confirm',
     //   message: 'Set up unit tests',
@@ -128,6 +160,7 @@ module.exports = {
     'overlay/**/*': 'templates.overlay',
     'config/**/*': 'templates.config',
     '*/pages/request-permission.vue': 'useIdShare',
+    'locales/**/*': 'i18n'
     // 'config/index.html': '!templates.config',
     // 'config/test.env.js': 'unit || e2e',
     // 'build/webpack.test.conf.js': "unit && runner === 'karma'",
