@@ -18,6 +18,7 @@
   "devDependencies": {
     "@babel/core": "7.x",
     "@babel/plugin-proposal-object-rest-spread": "7.x",
+    "@babel/preset-env": "^7.6.2",
     "@vue/component-compiler-utils": "1.x",
     "babel-loader": "8.x",
     "copy-webpack-plugin": "latest",
