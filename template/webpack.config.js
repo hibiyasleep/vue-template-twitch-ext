@@ -67,10 +67,11 @@ module.exports = {
         }
       }, {
         test: /\.(png|svg)$/,
-        loader: "url-loader?name=assets/img/[name].[ext]" // ,
-        // options: {
-        //   name: '[name].[ext]?[hash]'
-        // }
+        loader: "url-loader?name=assets/img/[name].[ext]",
+        options: {
+         limit: 10000,
+           fallback: "file-loader"
+        }
       }
     ]
   },
