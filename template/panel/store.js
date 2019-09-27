@@ -106,6 +106,6 @@ const lang = languages()
 Vue.use(vuexI18n.plugin, store)
 Object.keys(lang).forEach(l => Vue.i18n.add(l, lang[l]))
 Vue.i18n.fallback('{{ i18nLang }}')
-Vue.i18n.set('{{ i18nLang ')
+Vue.i18n.set('{{ i18nLang }}')
 {{/if_eq}}
 export default store
