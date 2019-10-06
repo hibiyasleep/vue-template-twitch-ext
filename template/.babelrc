@@ -11,5 +11,8 @@
       },
       "debug": true
     }]
+  ],
+  "plugins": [
+    ["@babel/transform-runtime"]
   ]
 }
