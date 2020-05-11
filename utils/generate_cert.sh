@@ -10,8 +10,8 @@ openssl req \
   -extensions SAN \
   -config <( cat $( [[ "Darwin" = "$(uname -s)" ]]  && echo /System/Library/OpenSSL/openssl.cnf || echo /etc/ssl/openssl.cnf  ) \
     <(printf "[SAN]\nsubjectAltName='DNS:localhost'")) \
-  -keyout "${DIR}/${NAME}.key" \
-  -out "${DIR}/${NAME}.crt"
+  -keyout "~/.twitch-ext-certs/${NAME}.key" \
+  -out "~/.twitch-ext-certs/${NAME}.crt"
 
 echo ""
 echo "* Generated $NAME.key and $NAME.crt files in local directory"
@@ -20,12 +20,12 @@ echo ""
 if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "* Installing cert into local Keychain."
   echo "* To see or modify, run 'Keychain Access' app and look in the 'System' Folder"
-  sudo security add-trusted-cert -d -p ssl -r trustRoot -k "/Library/Keychains/System.keychain" "${DIR}/${NAME}.crt"
+  sudo security add-trusted-cert -d -p ssl -r trustRoot -k "/Library/Keychains/System.keychain" "~/.twitch-ext-certs/${NAME}.crt"
 else
   echo "* Please install and trust cert at conf/$NAME.crt"
 fi
 cd "$DIR"
-if [[ ! -d "${DIR}/../conf/" ]]; then
-  mkdir "${DIR}/../conf/"
+if [[ ! -d "~/.twitch-ext-certs/" ]]; then
+  mkdir "~/.twitch-ext-certs"
 fi
-mv ${NAME}.{key,crt} "${DIR}/../conf/"
+mv ${NAME}.{key,crt} "~/.twitch-ext-certs/"
