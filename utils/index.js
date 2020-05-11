@@ -81,18 +81,11 @@ Documentation can be found at https://vuejs-templates.github.io/webpack
   console.log(message)
 }
 
-exports.runScript = function runScript(script, args, options) {
+exports.runScript = function runScript(script) {
   return new Promise((resolve, reject) => {
     const sp = spawn(
       'bash',
       [`${__dirname}/${script}`],
-      Object.assign({
-          cwd: process.cwd(),
-          stdio: 'inherit',
-          shell: true
-        },
-        options
-      )
     )
 
     sp.on('exit', () => {
