@@ -7,8 +7,23 @@ const {
   runLintFix,
   printMessage,
 } = require('./utils')
+const pkg = require('./package.json')
+
+const templateVersion = pkg.version
 
 module.exports = {
+  helpers: {
+    includes: (list, check) => list.includes(check),
+    toArray: o => JSON.stringify(Object.keys(o).filter(_ => o[_])),
+    if_or(v1, v2, options) {
+
+      if (v1 || v2) {
+        return options.fn(this)
+      }
+
+      return options.inverse(this)
+    },
+  },
   prompts: {
     name: {
       type: "string",
@@ -93,6 +108,34 @@ module.exports = {
         }
       ]
     },
+    templates: {
+      type: 'checkbox',
+      message: 'Which extension parts will you build?',
+      choices: [
+        {
+          name: 'Component (for video component, and/or panel, mobile)',
+          value: 'component',
+          short: 'Component',
+        }, {
+          name: 'Panel (and/or mobile)',
+          value: 'panel',
+          short: 'Panel',
+        }, {
+          name: 'Overlay (for fullscreen component)',
+          value: 'overlay',
+          short: 'Overlay',
+        }, {
+          name: 'Configuration page',
+          value: 'config',
+          short: 'Config',
+        },
+      ],
+      default: ['component', 'panel', 'overlay', 'config']
+    },
+    useIdShare: {
+      type: 'confirm',
+      message: 'Request Identify Share to users?'
+    },
     autoInstall: {
       type: 'list',
       message: 'Should we run `npm install` for you after the project has been created? (recommended)',
@@ -170,10 +213,6 @@ module.exports = {
       }
     }
   },
-  helpers: {
-    includes: (list, check) => list.includes(check),
-    toArray: o => JSON.stringify(Object.keys(o).filter(_ => o[_]))
-  },
   filters: {
     '.eslintrc.js': 'lint',
     '.eslintignore': 'lint',
@@ -200,6 +239,7 @@ module.exports = {
   }) {
     const green = chalk.green
 
+    sortDependencies(data, green)
     sortDependencies(data, green)
     const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
 
