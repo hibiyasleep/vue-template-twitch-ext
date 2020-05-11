@@ -81,6 +81,26 @@ Documentation can be found at https://vuejs-templates.github.io/webpack
   console.log(message)
 }
 
+exports.runScript = function runScript(script, args, options) {
+  return new Promise((resolve, reject) => {
+    const spawn = spawn(
+      'bash',
+      [`${__dirname}/${script}`],
+      Object.assign({
+          cwd: process.cwd(),
+          stdio: 'inherit',
+          shell: true
+        },
+        options
+      )
+    )
+
+    spawn.on('exit', () => {
+      resolve()
+    })
+  })
+}
+
 /**
  * If the user will have to run lint --fix themselves, it returns a string
  * containing the instruction for this step.

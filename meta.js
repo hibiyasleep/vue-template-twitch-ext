@@ -6,6 +6,7 @@ const {
   installDependencies,
   runLintFix,
   printMessage,
+  runScript
 } = require('./utils')
 const pkg = require('./package.json')
 
@@ -136,6 +137,10 @@ module.exports = {
       type: 'confirm',
       message: 'Request Identify Share to users?'
     },
+    needCertGenerate: {
+      type: 'confirm',
+      message: 'Would you like to generate the localhost SSL certificate?'
+    },
     autoInstall: {
       type: 'list',
       message: 'Should we run `npm install` for you after the project has been created? (recommended)',
@@ -234,13 +239,17 @@ module.exports = {
     // 'test/unit/setup.js': "unit && runner === 'jest'",
     // 'test/e2e/**/*': 'e2e',
   },
-  complete: function(data, {
+  complete: async function(data, {
     chalk
   }) {
     const green = chalk.green
 
     sortDependencies(data, green)
     const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
+
+    if(data.needCertGenerate) {
+      await runScript('utils/generate_cert.sh')
+    }
 
     if (data.autoInstall) {
       installDependencies(cwd, data.autoInstall, green)
