@@ -8,7 +8,7 @@
 
 </script>
 
-<style lang="sass">
+<style lang="scss">
 
 body
   font-family: system-ui, sans-serif

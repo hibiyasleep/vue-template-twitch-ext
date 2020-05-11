@@ -23,9 +23,9 @@ module.exports = {
       label: "License",
       default: "MIT"
     },
-    sass: {
+    scss: {
        type: "confirm",
-       message: "Use sass?",
+       message: "Use SCSS?",
        default: true
     },
     lint: {

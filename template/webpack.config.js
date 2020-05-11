@@ -7,6 +7,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const ZipWebpackPlugin = require('zip-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const { VueLoaderPlugin } = require("vue-loader");
+
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
@@ -27,34 +29,44 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ],
-      },{{#sass}} {
-        test: /\.sass$/,
+      },{{#scss}}
+      {
+        test: /\.scss$/,
         use: [
           'vue-style-loader',
           'css-loader',
-          'sass-loader?indentedSyntax'
+          'sass-loader',
+          {
+            loader: "sass-resources-loader",
+            options: {
+              // resources: [  // add global scss files here
+              //   "./styles/_global.scss",
+              //   "./styles/_fonts.scss",
+              //   "./styles/_variables.scss",
+              // ],
+            },
+          },
         ],
-      },{{/sass}} {
+      },
+    {{/scss}} {
         test: /\.vue$/,
-        loader: 'vue-loader'{{#sass}},
+        loader: 'vue-loader'{{#scss}},
         options: {
           loaders: {
-            // scss is not configured here; to use scss, copy sass to scss and
-            // turn off indentedSyntax option.
-            'sass': [
+            'scss': [
               'vue-style-loader',
               'css-loader',
               {
                 loader: 'sass-loader',
-                options: {
-                  indentedSyntax: true,
-                  // data: '@import "variables";',
-                  includePaths: [ path.resolve(__dirname, './styles') ]
-                }
+                options: { // add variables or mixin here
+                  // prependData: `
+                  //   @import "~@/styles/_variables.scss";
+                  // `,
+                },
               }
             ]
           }
-        }{{/sass}}
+        }{{/scss}}
       }, {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -101,6 +113,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   plugins: [
     // new BundleAnalyzerPlugin(),
+    new VueLoaderPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     ...{{toArray templates}}.map(_ => new HtmlWebpackPlugin({
