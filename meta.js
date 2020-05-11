@@ -240,7 +240,6 @@ module.exports = {
     const green = chalk.green
 
     sortDependencies(data, green)
-    sortDependencies(data, green)
     const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
 
     if (data.autoInstall) {
@@ -263,7 +262,6 @@ module.exports = {
       'All set. Welcome to your new Twitch Extension project!',
       '',
       `Next Steps:\n${!data.inPlace ? '\n  \x1b[33m$\x1b[0m cd ' + data.destDirName : ''}`,
-      '  \x1b[33m$\x1b[0m yarn (or `npm install`)',
       '  \x1b[33m$\x1b[0m yarn run dev (or `npm run dev`)'
     ].join('\n'))
   }
