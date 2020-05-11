@@ -248,7 +248,7 @@ module.exports = {
     const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
 
     if(data.needCertGenerate) {
-      await runScript('utils/generate_cert.sh')
+      await runScript('generate_cert.sh')
     }
 
     if (data.autoInstall) {
