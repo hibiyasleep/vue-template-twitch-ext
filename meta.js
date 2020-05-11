@@ -168,63 +168,63 @@ module.exports = {
         type: 'confirm',
         message: 'Request Identify Share to users?'
       }
-    },
-    helpers: {
-      includes: (list, check) => list.includes(check),
-      toArray: o => JSON.stringify(Object.keys(o).filter(_ => o[_]))
-    },
-    filters: {
-      '.eslintrc.js': 'lint',
-      '.eslintignore': 'lint',
-      '.prettierrc': 'lintConfig.prettier',
-      'component/**/*': 'templates.component',
-      'panel/**/*': 'templates.panel',
-      'overlay/**/*': 'templates.overlay',
-      'config/**/*': 'templates.config',
-      '*/pages/request-permission.vue': 'useIdShare',
-      'locales/**/*': 'i18n'
-      // 'config/index.html': '!templates.config',
-      // 'config/test.env.js': 'unit || e2e',
-      // 'build/webpack.test.conf.js': "unit && runner === 'karma'",
-      // 'test/unit/**/*': 'unit',
-      // 'test/unit/index.js': "unit && runner === 'karma'",
-      // 'test/unit/jest.conf.js': "unit && runner === 'jest'",
-      // 'test/unit/karma.conf.js': "unit && runner === 'karma'",
-      // 'test/unit/specs/index.js': "unit && runner === 'karma'",
-      // 'test/unit/setup.js': "unit && runner === 'jest'",
-      // 'test/e2e/**/*': 'e2e',
-    },
-    complete: function(data, {
-      chalk
-    }) {
-      const green = chalk.green
-
-      sortDependencies(data, green)
-      const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
-
-      if (data.autoInstall) {
-        installDependencies(cwd, data.autoInstall, green)
-          .then(() => {
-            return runLintFix(cwd, data, green)
-          })
-          .then(() => {
-            printMessage(data, green)
-          })
-          .catch(e => {
-            console.log(chalk.red('Error:'), e)
-          })
-      } else {
-        printMessage(data, chalk)
-      }
-      console.log([
-        '\n---',
-        '',
-        'All set. Welcome to your new Twitch Extension project!',
-        '',
-        `Next Steps:\n${!data.inPlace ? '\n  \x1b[33m$\x1b[0m cd ' + data.destDirName : ''}`,
-        '  \x1b[33m$\x1b[0m yarn (or `npm install`)',
-        '  \x1b[33m$\x1b[0m yarn run dev (or `npm run dev`)'
-      ].join('\n'))
     }
+  },
+  helpers: {
+    includes: (list, check) => list.includes(check),
+    toArray: o => JSON.stringify(Object.keys(o).filter(_ => o[_]))
+  },
+  filters: {
+    '.eslintrc.js': 'lint',
+    '.eslintignore': 'lint',
+    '.prettierrc': 'lintConfig.prettier',
+    'component/**/*': 'templates.component',
+    'panel/**/*': 'templates.panel',
+    'overlay/**/*': 'templates.overlay',
+    'config/**/*': 'templates.config',
+    '*/pages/request-permission.vue': 'useIdShare',
+    'locales/**/*': 'i18n'
+    // 'config/index.html': '!templates.config',
+    // 'config/test.env.js': 'unit || e2e',
+    // 'build/webpack.test.conf.js': "unit && runner === 'karma'",
+    // 'test/unit/**/*': 'unit',
+    // 'test/unit/index.js': "unit && runner === 'karma'",
+    // 'test/unit/jest.conf.js': "unit && runner === 'jest'",
+    // 'test/unit/karma.conf.js': "unit && runner === 'karma'",
+    // 'test/unit/specs/index.js': "unit && runner === 'karma'",
+    // 'test/unit/setup.js': "unit && runner === 'jest'",
+    // 'test/e2e/**/*': 'e2e',
+  },
+  complete: function(data, {
+    chalk
+  }) {
+    const green = chalk.green
+
+    sortDependencies(data, green)
+    const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
+
+    if (data.autoInstall) {
+      installDependencies(cwd, data.autoInstall, green)
+        .then(() => {
+          return runLintFix(cwd, data, green)
+        })
+        .then(() => {
+          printMessage(data, green)
+        })
+        .catch(e => {
+          console.log(chalk.red('Error:'), e)
+        })
+    } else {
+      printMessage(data, chalk)
+    }
+    console.log([
+      '\n---',
+      '',
+      'All set. Welcome to your new Twitch Extension project!',
+      '',
+      `Next Steps:\n${!data.inPlace ? '\n  \x1b[33m$\x1b[0m cd ' + data.destDirName : ''}`,
+      '  \x1b[33m$\x1b[0m yarn (or `npm install`)',
+      '  \x1b[33m$\x1b[0m yarn run dev (or `npm run dev`)'
+    ].join('\n'))
   }
 }
