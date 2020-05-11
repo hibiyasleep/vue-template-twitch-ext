@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 NAME=${1:-server}
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+
+if [[ ! -d "~/.twitch-ext-certs/" ]]; then
+  mkdir "~/.twitch-ext-certs"
+fi
+
 openssl req \
   -newkey rsa:4096 \
   -days 1001 \
@@ -25,7 +31,4 @@ else
   echo "* Please install and trust cert at conf/$NAME.crt"
 fi
 cd "$DIR"
-if [[ ! -d "~/.twitch-ext-certs/" ]]; then
-  mkdir "~/.twitch-ext-certs"
-fi
 mv ${NAME}.{key,crt} "~/.twitch-ext-certs/"
