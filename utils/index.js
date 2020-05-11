@@ -83,7 +83,7 @@ Documentation can be found at https://vuejs-templates.github.io/webpack
 
 exports.runScript = function runScript(script, args, options) {
   return new Promise((resolve, reject) => {
-    const spawn = spawn(
+    const sp = spawn(
       'bash',
       [`${__dirname}/${script}`],
       Object.assign({
@@ -95,7 +95,7 @@ exports.runScript = function runScript(script, args, options) {
       )
     )
 
-    spawn.on('exit', () => {
+    sp.on('exit', () => {
       resolve()
     })
   })
