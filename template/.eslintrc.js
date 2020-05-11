@@ -3,7 +3,9 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
+    ecmaVersion: 7,
+    sourceType: 'module',
   },
   env: {
     browser: true,
@@ -24,6 +26,7 @@ module.exports = {
   {{/if_eq}}
   {{#if_eq lintConfig "prettier"}}
   extends: [
+      'plugin:vue/essential',
       'prettier',
       'prettier/vue',
       'plugin:prettier/recommended',
