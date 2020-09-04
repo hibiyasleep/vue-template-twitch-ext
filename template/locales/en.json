@@ -1,0 +1,6 @@
+{
+  "hello": "hello world",
+  "message": {
+    "permission": "Please allow identify sharing, to use this extension."
+  }
+}

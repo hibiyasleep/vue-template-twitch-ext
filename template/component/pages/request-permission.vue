@@ -1,7 +1,11 @@
 <template>
   <div>
     <p>
-      Please allow identify sharing, to use this extension.
+      {{#if i18n}}
+        <span v-text="$t('message.permission')" />
+      {{else}}
+        Please allow identify sharing, to use this extension.
+      {{/if}}
     </p>
     <p>
       <button @click="grant">requestIdShare()</button>
@@ -21,6 +25,6 @@ export default {
 
 </script>
 
-<style lang="sass">
+<style lang="scss">
 
 </style>

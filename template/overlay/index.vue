@@ -8,12 +8,13 @@
 
 </script>
 
-<style lang="sass">
+<style lang="scss">
+body {
+  font-family: system-ui, sans-serif;
+}
 
-body
-  font-family: system-ui, sans-serif
-
-.twitch-color-mode-dark
+.twitch-color-mode-dark {
   color: #e0e0e0
-
+;
+}
 </style>

@@ -1,6 +1,18 @@
 {
   "presets": [
-    ["env", { "modules": false }],
-    "stage-3"
+    [ "@babel/preset-env", {
+      "targets": {
+        "browsers": [
+          "last 3 versions",
+          "not dead",
+          "not ie <= 10",
+          "not android < 300"
+        ]
+      },
+      "debug": true
+    }]
+  ],
+  "plugins": [
+    ["@babel/transform-runtime"]
   ]
 }

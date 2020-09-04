@@ -1,0 +1,6 @@
+{
+  "hello": "헬로월드",
+  "message": {
+    "permission": "익스텐션을 사용하기 위해 Identify Sharing 설정을 허용해주십시오."
+  }
+}

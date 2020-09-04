@@ -1,0 +1,10 @@
+{
+  "name": "vue-template-twitch-ext",
+  "version": "1.0.0",
+  "description": "Vue.js boilerplate for Twitch Extension",
+  "repository": "git@github.com:luiseok/vue-template-twitch-ext",
+  "license": "MIT",
+  "devDependencies": {
+    "vue-cli": "^2.8.1"
+  }
+}
